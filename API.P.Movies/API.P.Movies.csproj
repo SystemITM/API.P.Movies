@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -24,7 +24,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="DAL\Models\Dtos\" />
     <Folder Include="MoviesMapper\" />
-    <Folder Include="Repository\IRepository\" />
   </ItemGroup>
 
 </Project>
