@@ -9,7 +9,7 @@ namespace API.P.Movies.DAL
         {
         }
 
-        //Seccion para crear el dbset de lñas entidades o modelos
+        //Seccion para crear el dbset de las entidades o modelos
 
         public DbSet<Category>Categories { get; set; }
 
