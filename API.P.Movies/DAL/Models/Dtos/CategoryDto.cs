@@ -4,7 +4,7 @@ namespace API.P.Movies.DAL.Models.Dtos
 {
     public class CategoryDto
     {
-        [Required(ErrorMessage = "El Nombre de la categoria es obligarotuia")]
+        [Required(ErrorMessage = "El Nombre de la categoria es obligatorio")]
         [MaxLength(100, ErrorMessage = "El numero maximo de caracteres es de 100.")]
         public int Id { get; set; }
 

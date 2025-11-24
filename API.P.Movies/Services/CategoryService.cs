@@ -26,10 +26,38 @@ namespace API.P.Movies.Services
         {
             throw new NotImplementedException();
         }
-
+        /*
         public async Task<bool> CreateCategoryAsync(Category category)
         {
             throw new NotImplementedException();
+        }
+        */
+
+        public async Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto CategoryCreateDto)
+        {
+          //Validar si la categoria ya existe
+         var categoryExists = await _categoryRepository.CategoryExistsByNameAsync(CategoryCreateDto.Name);
+
+            if (categoryExists)
+            {
+                throw new InvalidOperationException($"Ya existe una categoria con el nombre de '{CategoryCreateDto.Name}'");
+            }
+
+            //Mapear el DTO a la entidad
+            var category = _mapper.Map<Category>(CategoryCreateDto);
+
+            //crear la categoria en el repositorio
+
+           var categoryCreated = await _categoryRepository.CreateCategoryAsync(category);
+
+            if (!categoryCreated)
+            {
+                throw new Exception("Ocurrio un erro al crear la categoria");
+            }
+
+            //Mapear la entidad al DTO
+
+            return _mapper.Map<CategoryDto>(category);
         }
 
         public async Task<bool> DeleteCategoryAsync(int id)
@@ -55,6 +83,11 @@ namespace API.P.Movies.Services
         }
 
         public async Task<bool> UpdateCategoryAsync(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<CategoryDto> UpdateCategoryAsync(int id, Category categoryDto)
         {
             throw new NotImplementedException();
         }
