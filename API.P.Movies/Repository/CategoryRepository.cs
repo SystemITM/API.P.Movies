@@ -44,9 +44,9 @@ namespace API.P.Movies.Repository
         {
             var category = await GetCategoryAsync(id);
 
-            if (category != null)
+            if (category == null)
             {
-                return false;
+                return false; //la categoria no existe
             }
 
             _context.Categories.Remove(category);
