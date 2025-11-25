@@ -33,7 +33,7 @@ namespace API.P.Movies.Services
         }
         */
 
-        public async Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto CategoryCreateDto)
+        public async Task<CategoryDto> CreateCategoryAsync(CategoryCreateUpdateDto CategoryCreateDto)
         {
           //Validar si la categoria ya existe
          var categoryExists = await _categoryRepository.CategoryExistsByNameAsync(CategoryCreateDto.Name);
@@ -82,14 +82,44 @@ namespace API.P.Movies.Services
             return _mapper.Map<CategoryDto>(category);
         }
 
+        /*
         public async Task<bool> UpdateCategoryAsync(Category category)
         {
             throw new NotImplementedException();
-        }
+        }*/
 
-        public Task<CategoryDto> UpdateCategoryAsync(int id, Category categoryDto)
+        public async Task<CategoryDto> UpdateCategoryAsync(CategoryCreateUpdateDto dto, int id)
         {
-            throw new NotImplementedException();
+
+
+            //Validar si la categoria ya existe
+            var categoryExists = await _categoryRepository.GetCategoryAsync(id);
+
+            if (categoryExists == null)
+            {
+                throw new InvalidOperationException($"No se encontró la categoria con ID '{id}'");
+            }
+
+            var nameExists = await _categoryRepository.CategoryExistsByNameAsync(dto.Name);
+
+            if(nameExists)
+            {
+                throw new InvalidOperationException($"Ya existe una categoria con el nombre de '{dto.Name}'");
+            }
+
+            //Mapear el DTO a la entidad
+            _mapper.Map(dto, categoryExists);
+
+            //Actualizamos la categoria en el repositorio
+            var categoryUpdated = await _categoryRepository.UpdateCategoryAsync(categoryExists);
+
+            if (!categoryUpdated)
+            {
+               throw new Exception("Ocurrio un error al actualziar la categoria");
+            }
+
+            //Retornar el DTO actualizado
+            return _mapper.Map<CategoryDto>(categoryExists);
         }
     }
 }
