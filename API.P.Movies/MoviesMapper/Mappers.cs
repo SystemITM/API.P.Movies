@@ -8,10 +8,14 @@ namespace API.P.Movies.MoviesMapper
     {
         public Mappers() 
         {
+            //GATEGORY
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Category, CategoryCreateUpdateDto>().ReverseMap();
 
-            
+            //MOVIE
+
+            CreateMap<Movie, MovieDto>().ReverseMap(); // Entity → DTO (respuesta)
+            CreateMap<Movie, MovieCreateUpdateDto>().ReverseMap(); // DTO → Entity (crear/actualizar)
         }
     }
 }

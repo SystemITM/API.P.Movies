@@ -1,4 +1,5 @@
-﻿using API.P.Movies.DAL.Models.Dtos;
+﻿using API.P.Movies.DAL.Models;
+using API.P.Movies.DAL.Models.Dtos;
 using API.P.Movies.Services.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -122,7 +123,7 @@ namespace API.P.Movies.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteCategoryAsync(int id)
         {
-           
+            
             try
             {
                 var deletedCategory = await _categoryService.DeleteCategoryAsync(id);
@@ -139,6 +140,8 @@ namespace API.P.Movies.Controllers
 
             }
         }
+
+       
 
     }
 }

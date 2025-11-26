@@ -6,6 +6,10 @@ using API.P.Movies.Services;
 using API.P.Movies.Services.IServices;
 using Microsoft.EntityFrameworkCore;
 
+
+
+ // o tu namespace real del DbContext
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,7 +21,12 @@ builder.Services.AddAutoMapper(cfg => cfg.AddProfile<Mappers>());
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 //Dependency Inhection for Repositories
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); 
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+//Registro de servicios Movie
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IMovieService, MovieService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
